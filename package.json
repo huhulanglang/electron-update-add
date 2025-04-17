@@ -1,0 +1,69 @@
+{
+  "name": "update-test",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron .",
+    "electron-build": "electron-builder --win --x64",
+    "electron-build-ia32": "electron-builder --win --ia32"
+  },
+  "build": {
+    "productName": "测试更新",
+    "appId": "com.update.app",
+    "copyright": "测试更新",
+    "directories": {
+      "output": "test"
+    },
+    "files": [
+      "**/*",
+      "!test/**/*"
+    ],
+    "afterPack": "./afterPack.js",
+    "asar": true,
+    "asarUnpack": [
+      "dist/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://pc.jijile.net/"
+      }
+    ],
+    "win": {
+      "icon": "",
+      "requestedExecutionLevel": "highestAvailable",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "deleteAppDataOnUninstall": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "perMachine": false,
+      "shortcutName": "测试更新"
+    }
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "crypto": "^1.0.1",
+    "electron-auto-updater-enhanced": "^1.0.8",
+    "electron-log": "^5.3.3"
+  },
+  "devDependencies": {
+    "electron": "22.3.27",
+    "electron-builder": "^22.14.5"
+  },
+  "author": "测试更新"
+}

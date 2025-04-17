@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>test</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>1.0.0</div>
+        <button id="checkUpdateVersionBtn" type="button">检查更新</button>
+        <button id="checkUpdateBtn" type="button">强制更新</button>
+        <button id="backVersionBtn" type="button">版本回退</button>
+        <button id="quitAppBtn" type="button">退出并静默更新</button>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        let ipcRenderer = window.electronAPI.ipcRenderer;
+
+        const checkForUpdateVersion = function () {
+            ipcRenderer.send("checkForUpdateVersion");
+        }
+        const checkForUpdate = function () {
+            ipcRenderer.send("checkForUpdate");
+        }
+        const backVersion = function () {
+            ipcRenderer.send("backVersion");
+        }
+        const quitApp = function () {
+            ipcRenderer.send("quitApp");
+        }
+
+        document.getElementById('checkUpdateVersionBtn').addEventListener('click', checkForUpdateVersion);
+        document.getElementById('checkUpdateBtn').addEventListener('click', checkForUpdate);
+        document.getElementById('backVersionBtn').addEventListener('click', backVersion);
+        document.getElementById('quitAppBtn').addEventListener('click', quitApp);
+
+        ipcRenderer.on("message", (event, arg) => {
+            console.log(arg);
+        });
+    }
+
+</script>
