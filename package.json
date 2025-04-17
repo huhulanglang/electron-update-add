@@ -29,7 +29,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "http://pc.jijile.net/"
+        "url": "http://pc.****.net/"
       }
     ],
     "win": {
